@@ -1,11 +1,18 @@
-<% layout('layout') -%>
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head %>
+
+    <body>
+        <% include ../partials/navbar %>
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-md-4">
-                <img class="img-circle img-responsive img-center" src="<%= user.profile.picture %>" alt="image">
-                <br />
+            <div class="container">
+
+                <div class="media border p-3">
+                    <img class="mr-3 mt-3 rounded-circle" src="<%= user.profile.picture %>" style="width: 60px;" alt="<%= user.name %>">
+                    <br />
+
+                </div>
                 <p>Name:
                     <%= user.profile.name %>
                 </p>
@@ -23,11 +30,11 @@
                         </p>
 
                         <% } %>
-                            <a href="/edit-profile">Edit Profile</a>
-
-
-
+                            <a href="/edit-profile" class="btn btn-outline-primary">Edit Profile</a>
 
             </div>
-        </div>
-    </div>
+            <% include ../partials/scripts %>
+                <% include ../partials/footer %>
+    </body>
+
+</html>

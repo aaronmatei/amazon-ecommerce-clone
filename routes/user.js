@@ -1,20 +1,17 @@
-const router = require('express').Router()
-const User = require('../models/user')
-const passport = require('passport')
-const gravatar = require('gravatar')
-const passportConf = require('../config/passport')
+var router = require('express').Router();
+var User = require('../models/user');
+var passport = require('passport');
+var passportConf = require('../config/passport');
+
 
 router.get('/login', function (req, res) {
     if (req.user) 
         return res.redirect('/');
     
-
-
     res.render('accounts/login', {message: req.flash('loginMessage')});
 });
 
 router.post('/login', passport.authenticate('local-login', {
-
     successRedirect: '/profile',
     failureRedirect: '/login',
     failureFlash: true
@@ -28,7 +25,6 @@ router.get('/profile', function (req, res, next) {
             return next(err);
         
 
-
         res.render('accounts/profile', {user: user});
 
     });
@@ -41,19 +37,12 @@ router.get('/signup', function (req, res, next) {
 });
 
 router.post('/signup', function (req, res, next) {
-    const avatar = gravatar.url(req.body.email, {
-        s: '200', // size
-        r: 'pg', // rating
-        d: 'mm' // default
-    });
-    const user = new User();
-
+    var user = new User();
 
     user.profile.name = req.body.name;
     user.email = req.body.email;
     user.password = req.body.password;
     user.profile.picture = user.gravatar();
-    // user.profile.picture = avatar;
 
     User.findOne({
         email: req.body.email
@@ -68,13 +57,10 @@ router.post('/signup', function (req, res, next) {
                     return next(err);
                 
 
-
                 req.logIn(user, function (err) {
                     if (err) 
                         return next(err);
                     
-
-
                     res.redirect('/profile');
 
                 })
@@ -102,23 +88,17 @@ router.post('/edit-profile', function (req, res, next) {
             return next(err);
         
 
-
         if (req.body.name) 
             user.profile.name = req.body.name;
         
-
-
         if (req.body.address) 
             user.address = req.body.address;
         
-
 
         user.save(function (err) {
             if (err) 
                 return next(err);
             
-
-
             req.flash('success', 'Successfully Edited your profile');
             return res.redirect('/edit-profile');
         });

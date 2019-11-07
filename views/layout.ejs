@@ -1,40 +1,24 @@
 <!doctype html>
 <html lang="en">
+<% include ./partials/head %>
 
-<head>
-
-    <title>Ecommerce</title>
-
-
-
-    <!-- Bootstrap core CSS -->
-    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="/css/custom.css">
-
-</head>
-
-<body>
-    <% include ./partials/navbar %>
-        <div class="container">
+    <body>
+        <% include ./partials/navbar %>
+            <div class="container">
 
 
 
-            <!-- Example row of columns -->
-            <%- body -%>
+                <!-- Example row of columns -->
+                <%- body -%>
 
 
-                <!-- /container -->
-        </div>
+                    <!-- /container -->
+            </div>
 
-        <% include ./partials/footer %>
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <% include ./partials/footer %>
+                <% include ./partials/scripts %>
 
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-</body>
+    </body>
 
 </html>

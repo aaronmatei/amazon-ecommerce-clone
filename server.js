@@ -14,6 +14,7 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
 
 const secret = require('./config/secret')
+const Category = require('./models/category')
 
 
 mongoose.connect(secret.database, secret.options).then(() => {
@@ -25,6 +26,7 @@ mongoose.connect(secret.database, secret.options).then(() => {
 
 // middleware
 app.use(express.static(__dirname + '/public'))
+
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -45,7 +47,15 @@ app.use(function (req, res, next) {
     next()
 })
 
-
+app.use((req, res, next) => {
+    Category.find({}, (err, categories) => {
+        if (err) {
+            return next(err)
+        }
+        res.locals.categories = categories
+        next()
+    })
+})
 app.engine('ejs', engine)
 app.set('view engine', 'ejs')
 // app.use(expressLayouts)
@@ -54,8 +64,12 @@ app.set('view engine', 'ejs')
 
 const mainRoutes = require('./routes/main')
 const userRoutes = require('./routes/user')
+const adminRoutes = require('./routes/admin')
+const apiRoutes = require('./api/api')
 app.use(mainRoutes)
 app.use(userRoutes)
+app.use(adminRoutes)
+app.use('/api', apiRoutes)
 
 
 app.listen(secret.port, function (err) {
