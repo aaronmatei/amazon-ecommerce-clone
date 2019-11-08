@@ -16,6 +16,8 @@ const passport = require('passport')
 const secret = require('./config/secret')
 const Category = require('./models/category')
 
+const cartLength = require('./middlewares/middlewares')
+
 
 mongoose.connect(secret.database, secret.options).then(() => {
     console.log(`connected to ${
@@ -46,6 +48,8 @@ app.use(function (req, res, next) {
     res.locals.user = req.user
     next()
 })
+
+app.use(cartLength)
 
 app.use((req, res, next) => {
     Category.find({}, (err, categories) => {

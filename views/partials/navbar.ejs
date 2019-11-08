@@ -3,11 +3,9 @@
     <div class="container">
         <a class="navbar-brand" href="/">Ecommerce</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarResponsive" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-
 
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -23,6 +21,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                <li class="nav-item">
+
+
+                </li>
+
 
 
             </ul>
@@ -49,13 +52,10 @@
                 </li>
 
 
-
-
-
                 <% if(!user) { %>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Login/Sign Up</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Login/Sign Up</a>
                         <div class="dropdown-menu">
 
                             <a class="dropdown-item" href="/login">Log in</a>
@@ -64,8 +64,6 @@
                             <a class="dropdown-item" href="/signup">Sign up</a>
 
                         </div>
-
-
 
 
                     </li>
@@ -78,16 +76,49 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href='/logout'> Sign out</a>
+                            <a class="nav-link" href='/logout'>
+                        Sign out</a>
                         </li>
                         <% } %>
+
+
+                            <% if (user) { %>
+                                <a class="nav-item" href="/cart">
+
+
+                    <span class="fa-stack fa-2x has-badge" data-count="<%= cart %>">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+
+                    </span>
+                </a>
+
+
+                                <% } else { %>
+                                    <a class="nav-item" href="/cart">
+
+
+                                        <span class="fa-stack fa-2x has-badge" data-count="0">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+
+                    </span>
+                                    </a>
+
+
+
+
+                                    <% } %>
             </ul>
 
         </div>
 
     </div>
-    <form class="form-inline my-2 my-lg-0" action="/search">
-        <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search.." aria-label="Search">
+    <form action="/search" class="form-inline my-2 my-lg-0">
+        <input aria-label="Search" class="form-control mr-sm-2" name="q" placeholder="Search.." type="text">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+
 </nav>
